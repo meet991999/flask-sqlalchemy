@@ -28,7 +28,6 @@ def home():
 @app.route("/add", methods=["GET", "POST"])
 def add():
     if request.method == "POST":
-        # CREATE RECORD
         new_book = Book(
             title=request.form["title"],
             author=request.form["author"],
@@ -43,7 +42,6 @@ def add():
 @app.route("/edit", methods=["GET", "POST"])
 def edit():
     if request.method == "POST":
-        #UPDATE RECORD
         book_id = request.form["id"]
         book_to_update = Book.query.get(book_id)
         book_to_update.rating = request.form["rating"]
@@ -57,8 +55,6 @@ def edit():
 @app.route("/delete")
 def delete():
     book_id = request.args.get('id')
-
-    # DELETE A RECORD BY ID
     book_to_delete = Book.query.get(book_id)
     db.session.delete(book_to_delete)
     db.session.commit()
